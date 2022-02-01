@@ -17,10 +17,10 @@ jobs:
       
       - name: try aria2 
         shell: cmd
-        cmd: aria2c "https://github.com/dirkarnez/serial-locate/releases/download/v1.0.0/serial-locate.exe" 
+        run: aria2c "https://github.com/dirkarnez/serial-locate/releases/download/v1.0.0/serial-locate.exe" 
         
       - name: dir 
         shell: cmd
-        cmd: dir
+        run: dir
         
         
