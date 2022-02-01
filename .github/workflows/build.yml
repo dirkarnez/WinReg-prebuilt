@@ -22,8 +22,16 @@ jobs:
       - name: modify WinReg/WinReg/WinReg.vcxproj 
         shell: cmd
         run: xml-direct-modifier.exe --source=WinReg/WinReg/WinReg.vcxproj --target=WinReg/WinReg/WinReg-patched.vcxproj --mode=innertext --xpath=Project/PropertyGroup/ConfigurationType --value=StaticLibrary
-     
+        
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: Build app for release
+        run: msbuild WinReg\WinReg\WinReg-patched.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release
+
       - name: check
         shell: cmd
         run: cd WinReg/WinReg && dir
+        
+        
         
