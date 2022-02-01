@@ -1,18 +1,18 @@
 name: winreg-prebuilt-release-actions-workflow
 on:
   push:
-    # Sequence of patterns matched against refs/tags
-    # tags:
-    #   - 'v*'
+    Sequence of patterns matched against refs/tags
+    tags:
+      - 'v*'
 
 jobs:
   build:
     name: Create Release
     runs-on: windows-latest
     env:
-      msvc2019TargetZip: clip-${{ github.ref_name }}-msvc2019.zip
+      msvc2019TargetZip: WinReg-${{ github.ref_name }}-msvc2019.zip
     steps:
-      - name: git clone elements
+      - name: git clone WinReg
         run: git clone --branch v4.1.2 https://github.com/GiovanniDicanio/WinReg.git
       
       - name: try aria2 
@@ -34,6 +34,24 @@ jobs:
       - name: check
         shell: cmd
         run: cd WinReg\WinReg\Release && dir
+        
+      - name: Prepare release
+        shell: cmd
+        run: md distribution && copy WinReg\WinReg\Release\WinReg-patched.lib distribution && ren "distribution\WinReg-patched.lib" "WinReg.lib" && copy WinReg\WinReg\WinReg.hpp distribution
+
+      - name: Archive Release
+        uses: thedoctor0/zip-release@master
+        with:
+          type: 'zip'
+          path: distribution
+          filename: "${{ env.msvc2019TargetZip }}"
+          
+      - name: Release prebuilt
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "${{ env.msvc2019TargetZip }}"
+          allowUpdates: true
+          token: ${{ secrets.GITHUB_TOKEN }}
         
         
         
