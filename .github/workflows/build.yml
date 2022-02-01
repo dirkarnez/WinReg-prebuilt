@@ -19,12 +19,11 @@ jobs:
         shell: cmd
         run: aria2c "https://github.com/dirkarnez/xml-direct-modifier/releases/download/v1.0.0/xml-direct-modifier-v1.0.0.zip"  && 7z.exe x xml-direct-modifier-v1.0.0.zip
         
-      - name: check 
-        shell: cmd
-        run: dir
-        
       - name: modify WinReg/WinReg/WinReg.vcxproj 
         shell: cmd
-        run: cd WinReg\WinReg && dir
-        
+        run: xml-direct-modifier.exe --source=WinReg/WinReg/WinReg.vcxproj --target=WinReg/WinReg/WinReg-patched.vcxproj --mode=innertext --xpath=Project/PropertyGroup/ConfigurationType --value=StaticLibrary
+     
+      - name: check
+        shell: cmd
+        run: cd WinReg/WinReg && dir
         
