@@ -25,13 +25,15 @@ jobs:
         
       - name: Add msbuild to PATH
         uses: microsoft/setup-msbuild@v1.1
+        with:
+          msbuild-architecture: x64
 
       - name: Build app for release
-        run: msbuild WinReg\WinReg\WinReg-patched.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Release
+        run: msbuild WinReg\WinReg\WinReg-patched.vcxproj -t:rebuild -property:Configuration=Release
 
       - name: check
         shell: cmd
-        run: cd WinReg/WinReg && dir
+        run: cd WinReg\WinReg\Release && dir
         
         
         
