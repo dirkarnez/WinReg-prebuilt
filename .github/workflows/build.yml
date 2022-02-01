@@ -36,13 +36,13 @@ jobs:
         
       - name: Prepare release
         shell: cmd
-        run: md distribution && copy WinReg\WinReg\Release\WinReg-patched.lib distribution && ren "distribution\WinReg-patched.lib" "WinReg.lib" && copy WinReg\WinReg\WinReg.hpp distribution
+        run: md distribution && cd distribution && md WinReg && copy ..\WinReg\WinReg\Release\WinReg-patched.lib WinReg && ren WinReg\WinReg-patched.lib WinReg.lib && copy ..\WinReg\WinReg\WinReg.hpp WinReg
 
       - name: Archive Release
         uses: thedoctor0/zip-release@master
         with:
           type: 'zip'
-          path: distribution
+          path: distribution/WinReg
           filename: "${{ env.msvc2019TargetZip }}"
           
       - name: Release prebuilt
