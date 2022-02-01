@@ -42,7 +42,8 @@ jobs:
         uses: thedoctor0/zip-release@master
         with:
           type: 'zip'
-          path: distribution/WinReg
+          directory: distribution
+          path: WinReg
           filename: "${{ env.msvc2019TargetZip }}"
           
       - name: Release prebuilt
