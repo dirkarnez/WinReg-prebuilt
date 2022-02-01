@@ -19,8 +19,8 @@ jobs:
 #         shell: cmd
 #         run: aria2c "https://github.com/dirkarnez/serial-locate/releases/download/v1.0.0/serial-locate.exe" 
         
-      - name: modify WinReg/WinReg.vcxproj 
+      - name: modify WinReg/WinReg/WinReg.vcxproj 
         shell: cmd
-        run: cd WinReg && dir
+        run: cd WinReg\WinReg && dir
         
         
