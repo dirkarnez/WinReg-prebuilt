@@ -13,14 +13,14 @@ jobs:
       msvc2019TargetZip: clip-${{ github.ref_name }}-msvc2019.zip
     steps:
       - name: git clone elements
-        run: git clone --branch v1.4 https://github.com/dacap/clip
+        run: git clone --branch v4.1.2 https://github.com/GiovanniDicanio/WinReg.git
       
-      - name: try aria2 
-        shell: cmd
-        run: aria2c "https://github.com/dirkarnez/serial-locate/releases/download/v1.0.0/serial-locate.exe" 
+#       - name: try aria2 
+#         shell: cmd
+#         run: aria2c "https://github.com/dirkarnez/serial-locate/releases/download/v1.0.0/serial-locate.exe" 
         
-      - name: dir 
+      - name: modify WinReg/WinReg.vcxproj 
         shell: cmd
-        run: dir
+        run: cd WinReg && dir
         
         
