@@ -42,6 +42,9 @@ jobs:
           path: WinReg
           filename: "${{ env.msvc2019TargetZip }}"
           
+      - run: move distribution\${{ env.msvc2019TargetZip }} .\
+        shell: cmd
+          
       - name: Release prebuilt
         uses: ncipollo/release-action@v1
         with:
