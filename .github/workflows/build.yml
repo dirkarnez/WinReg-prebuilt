@@ -29,10 +29,6 @@ jobs:
 
       - name: Build app for release
         run: msbuild WinReg\WinReg\WinReg-patched.vcxproj -t:rebuild -property:Configuration=Release
-
-      - name: check
-        shell: cmd
-        run: cd WinReg\WinReg\Release && dir
         
       - name: Prepare release
         shell: cmd
@@ -42,8 +38,8 @@ jobs:
         uses: thedoctor0/zip-release@master
         with:
           type: 'zip'
-          directory: WinReg
-          path: distribution
+          directory: distribution
+          path: WinReg
           filename: "${{ env.msvc2019TargetZip }}"
           
       - name: Release prebuilt
@@ -52,6 +48,4 @@ jobs:
           artifacts: "${{ env.msvc2019TargetZip }}"
           allowUpdates: true
           token: ${{ secrets.GITHUB_TOKEN }}
-        
-        
-        
+
